@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Portfolio Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .chart { width: 100%; height: 400px; }
+    </style>
+</head>
+<body>
+    <h1>Crypto Portfolio Tracker</h1>
+    <table>
+        <tr>
+            <th>Asset</th>
+            <th>Allocation (%)</th>
+            <th>Investment ($)</th>
+            <th>Price ($)</th>
+            <th>Units Held</th>
+            <th>Current Value ($)</th>
+        </tr>
+        <tr><td>Bitcoin (BTC)</td><td>40</td><td>4000</td><td><input type="number" id="btc_price" value="60000"></td><td id="btc_units"></td><td id="btc_value"></td></tr>
+        <tr><td>Ethereum (ETH)</td><td>30</td><td>3000</td><td><input type="number" id="eth_price" value="3500"></td><td id="eth_units"></td><td id="eth_value"></td></tr>
+        <tr><td>Cardano (ADA)</td><td>10</td><td>1000</td><td><input type="number" id="ada_price" value="0.5"></td><td id="ada_units"></td><td id="ada_value"></td></tr>
+        <tr><td>Solana (SOL)</td><td>10</td><td>1000</td><td><input type="number" id="sol_price" value="100"></td><td id="sol_units"></td><td id="sol_value"></td></tr>
+        <tr><td>Stablecoins (USDC/USDT)</td><td>10</td><td>1000</td><td><input type="number" id="usdt_price" value="1"></td><td id="usdt_units"></td><td id="usdt_value"></td></tr>
+    </table>
+    <button onclick="updateValues()">Update Portfolio</button>
+
+    <script>
+        function updateValues() {
+            const assets = [
+                {id: 'btc', investment: 4000},
+                {id: 'eth', investment: 3000},
+                {id: 'ada', investment: 1000},
+                {id: 'sol', investment: 1000},
+                {id: 'usdt', investment: 1000}
+            ];
+            assets.forEach(asset => {
+                const price = parseFloat(document.getElementById(asset.id + '_price').value);
+                const units = asset.investment / price;
+                const value = units * price;
+                document.getElementById(asset.id + '_units').innerText = units.toFixed(4);
+                document.getElementById(asset.id + '_value').innerText = value.toFixed(2);
+            });
+        }
+        updateValues();
+    </script>
+</body>
+</html>
